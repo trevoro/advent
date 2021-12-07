@@ -9,15 +9,10 @@ const read = () => {
     .map(e => parseInt(e, 10));
 };
 
-const fuel = (n: number) => {
-  let rval = 1;
-  for (let i = 2; i <= n; i++) rval = rval + i;
-  return rval;
-};
+const fuel = (n: number) => (n * (n + 1)) / 2;
 
 const min = (input: number[]) => {
-  input.sort((a, b) => a - b);
-  const max = input.at(-1) as number;
+  const max = Math.max(...input);
   const set = [...Array(max).keys()].map(i => {
     return input.map(e => fuel(Math.abs(e - i))).reduce((p, c) => p + c);
   });
