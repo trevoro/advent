@@ -9,13 +9,18 @@ const read = () => {
     .map(e => parseInt(e, 10));
 };
 
-const fuel = (n: number) => (n * (n + 1)) / 2;
+const fuel = (p: number, c: number) => {
+  const n = Math.abs(p - c);
+  return (n * (n + 1)) / 2;
+};
+
+const sum = (p: number, c: number) => p + c;
+
+const range = (n: number) => [...Array(n).keys()];
 
 const min = (input: number[]) => {
   const max = Math.max(...input);
-  const set = [...Array(max).keys()].map(i => {
-    return input.map(e => fuel(Math.abs(e - i))).reduce((p, c) => p + c);
-  });
+  const set = range(max).map(i => input.map(e => fuel(e, i)).reduce(sum));
   return Math.min(...set);
 };
 

@@ -2,16 +2,17 @@
 //
 const numTicks = 256;
 
+const zero = (size: number): number[] => new Array(size).fill(0);
+
 const input = Deno.readTextFileSync('./input/6')
   .split(',')
   .map(e => parseInt(e, 10)) as number[];
 
-const school = (input: number[]): number[] => {
-  return input.reduce((p: number[], c) => {
+const school = (input: number[]) =>
+  input.reduce((p, c) => {
     p[c]++;
     return p;
-  }, new Array(9).fill(0));
-};
+  }, zero(9));
 
 const tick = (fish: number[]) => {
   const x = fish.shift() as number;
